@@ -1,0 +1,25 @@
+<ng-container *ngIf="isOpened; then formTemplate; else ctaTemplate"></ng-container>
+
+<ng-template #ctaTemplate>
+  <button mat-raised-button color="accent" type="button" (click)="isOpened = true" @fromTop>
+    Задать вопрос
+  </button>
+</ng-template>
+
+<ng-template #formTemplate>
+  <form (ngSubmit)=" onSubmit()" [formGroup]="form" @fromTop>
+
+    <mat-form-field>
+      <input matInput placeholder="Ваше имя" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput cdkTextareaAutosize placeholder="Ваш вопрос" formControlName="text"></textarea>
+    </mat-form-field>
+
+    <div class="controls">
+      <button mat-stroked-button color="warn" type="button" (click)="isOpened = false">Отмена</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Отправить</button>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,18 @@
+<div class="title">
+  <h1 class="mat-headline">
+    Задавайте вопросы лектору
+  </h1>
+  <h3 class="mat-subheading-2">
+    И оценивайте вопросы других участников
+  </h3>
+</div>
+
+<app-question-form (formSubmit)="onCreate($event)"></app-question-form>
+
+<h3 class="mat-title">Список вопросов</h3>
+<ng-container *ngIf="(questions$ | async) as questions">
+  <app-questions-list>
+    <app-question-item *ngFor="let question of questions" [question]="question" (likeToggle)="likeToggle($event)">
+    </app-question-item>
+  </app-questions-list>
+</ng-container>
