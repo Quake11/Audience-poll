@@ -9,13 +9,10 @@ mat-card {
   mat-card-actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 
-    button {
+    .like-count {
       margin: 15px;
-
-      .like-count {
-        margin-left: 10px;
-      }
     }
   }
 }

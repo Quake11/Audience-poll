@@ -12,12 +12,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('QuestionItemComponent', () => {
   let component: QuestionItemComponent;
   let fixture: ComponentFixture<QuestionItemComponent>;
-
   const validQuestion: Question = {
     likes: 0,
     liked: false,
     name: 'Test user',
-    text: 'Test text',
+    text: 'Test text'
   };
 
   beforeEach(async(() => {
@@ -28,9 +27,9 @@ describe('QuestionItemComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatCardModule,
-        MatListModule,
+        MatListModule
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents()
       .then(() => {
@@ -52,29 +51,22 @@ describe('QuestionItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit event likeToggle on click like button', () => {
-    const { likeToggle, question } = component;
-    spyOn(likeToggle, 'emit');
-    const likeButton = fixture.nativeElement.querySelector('button.like');
-    likeButton.dispatchEvent(new Event('click'));
-    expect(likeToggle.emit).toHaveBeenCalledWith(question);
+  it('should emit likeToggle', () => {
+    spyOn(component.likeToggle, 'emit');
+    component.likeToggle.emit(validQuestion);
+    expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
   });
 
-  it('should increase like count', () => {
-    const { likeToggle, question } = component;
+  it('should emit likeToggle on like button click', () => {
+    spyOn(component.likeToggle, 'emit');
 
-    spyOn(likeToggle, 'emit');
-    const likeButton = fixture.nativeElement.querySelector('button.like');
-    likeButton.dispatchEvent(new Event('click'));
-    likeToggle.emit(validQuestion);
-    fixture.detectChanges();
+    const likeButton = fixture.debugElement.nativeElement.querySelector(
+      'button.like'
+    );
+    likeButton.click();
 
-    const likeCount = fixture.nativeElement.querySelector('.like-count');
-    const compiled = fixture.debugElement.nativeElement;
-    console.log(compiled);
-    console.log(question);
-    console.log(likeCount);
-
-    expect(likeToggle.emit).toHaveBeenCalledWith(question);
+    fixture.whenStable().then(() => {
+      expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
+    });
   });
 });

@@ -16,7 +16,7 @@ describe('QuestionFormComponent', () => {
 
   const validQuestion: Question = {
     name: 'Test user',
-    text: 'Test text',
+    text: 'Test text'
   };
 
   function updateForm(question: Question) {
@@ -36,8 +36,8 @@ describe('QuestionFormComponent', () => {
         MatListModule,
         MatInputModule,
         MatButtonModule,
-        MatIconModule,
-      ],
+        MatIconModule
+      ]
     }).compileComponents();
   }));
 
@@ -61,7 +61,7 @@ describe('QuestionFormComponent', () => {
     expect(component.form.valid).toBeFalsy();
   });
 
-  it('should emit event formSubmit on click send button', () => {
+  it('should emit event formSubmit', () => {
     spyOn(component.formSubmit, 'emit');
     updateForm(validQuestion);
     component.onSubmit();

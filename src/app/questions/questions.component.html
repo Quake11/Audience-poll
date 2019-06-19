@@ -13,7 +13,8 @@
 <ng-container *ngIf="(questions$ | async) as questions">
   <h2 class="mat-title" *ngIf="questions.length">Список вопросов</h2>
   <app-questions-list [@listAnimation]="questions.length">
-    <app-question-item *ngFor="let question of questions" [question]="question" (likeToggle)="likeToggle($event)">
+    <app-question-item *ngFor="let question of questions; trackBy: trackByFn;" [question]="question"
+      (likeToggle)="likeToggle($event)">
     </app-question-item>
   </app-questions-list>
 </ng-container>

@@ -8,7 +8,7 @@ import {
   loadQuestions,
   createQuestion,
   deleteQuestion,
-  toggleLikeQuestion,
+  toggleLikeQuestion
 } from './actions';
 import { Question } from 'src/app/models';
 

@@ -9,7 +9,7 @@ import {
   createQuestionSuccess,
   createQuestionFailure,
   deleteQuestion,
-  toggleLikeQuestion,
+  toggleLikeQuestion
 } from '../actions';
 
 /**
@@ -32,7 +32,7 @@ function sortByLikes(q1: Question, q2: Question) {
  * Adapter
  */
 export const adapter: EntityAdapter<Question> = createEntityAdapter<Question>({
-  sortComparer: sortByLikes,
+  sortComparer: sortByLikes
 });
 
 /**
@@ -50,10 +50,13 @@ export function reducer(state = initialState, action: QuestionsActions): State {
     }
     case loadQuestionsSuccess.type: {
       const { questions } = action.payload;
-      return adapter.addAll(questions.map(q => ({ likes: 0, ...q })), {
-        ...state,
-        loading: false,
-      });
+      if (questions && questions.length) {
+        return adapter.addAll(questions.map(q => ({ likes: 0, ...q })), {
+          ...state,
+          loading: false
+        });
+      }
+      return { ...state, loading: false };
     }
     case loadQuestionsFailure.type: {
       return { ...state, loading: false };
@@ -87,7 +90,7 @@ export function reducer(state = initialState, action: QuestionsActions): State {
 
       const changes = {
         id,
-        changes: { liked: likedNew, likes: likesNew },
+        changes: { liked: likedNew, likes: likesNew }
       };
       return adapter.updateOne(changes, { ...state });
     }
