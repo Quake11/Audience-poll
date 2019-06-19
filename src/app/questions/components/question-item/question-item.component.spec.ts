@@ -1,4 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  fakeAsync
+} from '@angular/core/testing';
 
 import { QuestionItemComponent } from './question-item.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -57,16 +62,12 @@ describe('QuestionItemComponent', () => {
     expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
   });
 
-  it('should emit likeToggle on like button click', () => {
+  it('should emit likeToggle on like button click', fakeAsync(() => {
     spyOn(component.likeToggle, 'emit');
-
     const likeButton = fixture.debugElement.nativeElement.querySelector(
       'button.like'
     );
     likeButton.click();
-
-    fixture.whenStable().then(() => {
-      expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
-    });
-  });
+    expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
+  }));
 });
