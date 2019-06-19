@@ -4,5 +4,12 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+app-questions-list {
+  .mat-list-base .mat-list-item.mat-2-line,
+  .mat-list-base .mat-list-option.mat-2-line {
+    height: auto !important;
+  }
 }

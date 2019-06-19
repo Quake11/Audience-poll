@@ -9,9 +9,10 @@
 
 <app-question-form (formSubmit)="onCreate($event)"></app-question-form>
 
-<h3 class="mat-title">Список вопросов</h3>
+
 <ng-container *ngIf="(questions$ | async) as questions">
-  <app-questions-list>
+  <h2 class="mat-title" *ngIf="questions.length">Список вопросов</h2>
+  <app-questions-list [@listAnimation]="questions.length">
     <app-question-item *ngFor="let question of questions" [question]="question" (likeToggle)="likeToggle($event)">
     </app-question-item>
   </app-questions-list>

@@ -1,10 +1,4 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 import * as fromQuestions from '../questions/reducers/questions.reducer';
 
@@ -13,7 +7,7 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-  questions: fromQuestions.reducer
+  questions: fromQuestions.reducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

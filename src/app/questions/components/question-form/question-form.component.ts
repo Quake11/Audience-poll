@@ -3,13 +3,13 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   FormControl,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Question } from 'src/app/models';
@@ -26,27 +26,26 @@ import { Question } from 'src/app/models';
         animate(
           '200ms ease-in-out',
           style({ opacity: 1, transform: 'translateY(0)' })
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class QuestionFormComponent implements OnInit {
   @Output() formSubmit: EventEmitter<Question> = new EventEmitter();
 
   form: FormGroup;
+  controls = {
+    name: new FormControl('', Validators.required),
+    text: new FormControl('', Validators.required),
+  };
+
   isOpened: boolean;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    const name = new FormControl('', Validators.required);
-    const text = new FormControl('', Validators.required);
-
-    this.form = this.fb.group({
-      name,
-      text
-    });
+    this.form = this.fb.group(this.controls);
   }
 
   onSubmit() {

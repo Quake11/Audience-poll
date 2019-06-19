@@ -8,7 +8,7 @@ import {
   loadQuestions,
   createQuestion,
   deleteQuestion,
-  toggleLikeQuestion
+  toggleLikeQuestion,
 } from './actions';
 import { Question } from 'src/app/models';
 
@@ -46,7 +46,7 @@ export class QuestionsFacade {
 
   /**
    * Toggle like
-   * @param id String
+   * @param question Question
    */
   toggleLike(question: Question) {
     this.store.dispatch(toggleLikeQuestion({ question }));

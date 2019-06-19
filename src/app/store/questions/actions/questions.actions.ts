@@ -15,7 +15,17 @@ export const loadQuestionsFailure = createAction(
 
 export const createQuestion = createAction(
   '[Questions] Create',
+  (payload: { question: Partial<Question> }) => ({ payload })
+);
+
+export const createQuestionSuccess = createAction(
+  '[Questions] Create success',
   (payload: { question: Question }) => ({ payload })
+);
+
+export const createQuestionFailure = createAction(
+  '[Questions] Create failure',
+  (payload: { error: any }) => ({ payload })
 );
 
 export const deleteQuestion = createAction(
@@ -33,8 +43,10 @@ const all = union({
   loadQuestionsSuccess,
   loadQuestionsFailure,
   createQuestion,
+  createQuestionSuccess,
+  createQuestionFailure,
   deleteQuestion,
-  toggleLikeQuestion
+  toggleLikeQuestion,
 });
 
 export type QuestionsActions = typeof all;

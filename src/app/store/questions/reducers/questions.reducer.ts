@@ -6,8 +6,10 @@ import {
   loadQuestionsSuccess,
   loadQuestionsFailure,
   createQuestion,
+  createQuestionSuccess,
+  createQuestionFailure,
   deleteQuestion,
-  toggleLikeQuestion
+  toggleLikeQuestion,
 } from '../actions';
 
 /**
@@ -18,23 +20,25 @@ export const STATE_ID = 'questions';
 /**
  * State
  */
-export interface State extends EntityState<Question> {}
+export interface State extends EntityState<Question> {
+  loading: boolean;
+}
 
 function sortByLikes(q1: Question, q2: Question) {
-  return q1.likes - q2.likes;
+  return q2.likes - q1.likes;
 }
 
 /**
  * Adapter
  */
 export const adapter: EntityAdapter<Question> = createEntityAdapter<Question>({
-  sortComparer: sortByLikes
+  sortComparer: sortByLikes,
 });
 
 /**
  * Initial state
  */
-export const initialState: State = adapter.getInitialState({});
+export const initialState: State = adapter.getInitialState({ loading: false });
 
 /**
  * Reducer
@@ -46,23 +50,32 @@ export function reducer(state = initialState, action: QuestionsActions): State {
     }
     case loadQuestionsSuccess.type: {
       const { questions } = action.payload;
-      return adapter.addAll(questions, { ...state });
+      return adapter.addAll(questions.map(q => ({ likes: 0, ...q })), {
+        ...state,
+        loading: false,
+      });
     }
     case loadQuestionsFailure.type: {
-      return { ...state };
+      return { ...state, loading: false };
     }
     case createQuestion.type: {
+      return { ...state, loading: true };
+    }
+    case createQuestionSuccess.type: {
       const { question } = action.payload;
-      return adapter.addOne(question, { ...state });
+      return adapter.addOne(question, { ...state, loading: false });
+    }
+    case createQuestionFailure.type: {
+      return { ...state, loading: false };
     }
     case deleteQuestion.type: {
       const { id } = action.payload;
-      return adapter.removeOne(id, { ...state });
+      return adapter.removeOne(id, { ...state, loading: true });
     }
     case toggleLikeQuestion.type: {
       const { id, liked, likes } = action.payload.question;
       let likedNew: boolean;
-      let likesNew: number;
+      let likesNew: number = likes;
 
       if (liked) {
         likedNew = false;
@@ -74,7 +87,7 @@ export function reducer(state = initialState, action: QuestionsActions): State {
 
       const changes = {
         id,
-        changes: { liked: likedNew, likes: likesNew }
+        changes: { liked: likedNew, likes: likesNew },
       };
       return adapter.updateOne(changes, { ...state });
     }

@@ -1,7 +1,7 @@
 <ng-container *ngIf="isOpened; then formTemplate; else ctaTemplate"></ng-container>
 
 <ng-template #ctaTemplate>
-  <button mat-raised-button color="accent" type="button" (click)="isOpened = true" @fromTop>
+  <button mat-raised-button color="accent" type="button" (click)="isOpened = true" @fromTop class="ask">
     Задать вопрос
   </button>
 </ng-template>
@@ -19,7 +19,8 @@
 
     <div class="controls">
       <button mat-stroked-button color="warn" type="button" (click)="isOpened = false">Отмена</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Отправить</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="submit">Отправить
+      </button>
     </div>
   </form>
 </ng-template>

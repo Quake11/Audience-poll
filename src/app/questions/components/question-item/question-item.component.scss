@@ -1,0 +1,21 @@
+mat-card {
+  width: 100%;
+
+  p {
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 15px;
+
+      .like-count {
+        margin-left: 10px;
+      }
+    }
+  }
+}

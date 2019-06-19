@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   QuestionsListComponent,
   QuestionItemComponent,
-  QuestionFormComponent
+  QuestionFormComponent,
 } from './components';
 import { QuestionsStoreModule } from '../store/questions';
 import { QuestionsComponent } from './questions.component';
@@ -15,16 +15,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     QuestionsComponent,
     QuestionsListComponent,
     QuestionItemComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     QuestionsStoreModule,
     AppStoreModule,
     MatFormFieldModule,
@@ -34,8 +37,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatInputModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
   ],
-  exports: [QuestionsComponent]
+  exports: [QuestionsComponent],
 })
 export class QuestionsModule {}
