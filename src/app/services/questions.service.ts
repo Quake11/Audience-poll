@@ -1,32 +1,17 @@
-import { Question } from 'src/app/models';
+import { Question, mockQuestions } from 'src/app/models';
 import { Injectable } from '@angular/core';
-import { of, from, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionsService {
-  mock = [
-    {
-      id: '1',
-      name: 'John Doe',
-      text:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-    },
-    {
-      id: '2',
-      name: 'Mary Sue',
-      text:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-  ];
-
   constructor() {}
 
   findAll(): Observable<Question[]> {
     //  mock fetch from api
-    return of(this.mock).pipe(delay(100));
+    return of(mockQuestions).pipe(delay(100));
   }
 
   create(question: Question) {
