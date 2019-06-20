@@ -1,15 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   FormControl,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Question } from 'src/app/models';
@@ -25,10 +19,10 @@ import { Question } from 'src/app/models';
         animate(
           '200ms ease-in-out',
           style({ opacity: 1, transform: 'translateY(0)' })
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class QuestionFormComponent implements OnInit {
   @Output() formSubmit: EventEmitter<Question> = new EventEmitter();
@@ -36,10 +30,17 @@ export class QuestionFormComponent implements OnInit {
   form: FormGroup;
   controls = {
     name: new FormControl('', Validators.required),
-    text: new FormControl('', Validators.required)
+    text: new FormControl('', Validators.required),
   };
 
-  isOpened: boolean;
+  private _isOpened: boolean;
+  get isOpened() {
+    return this._isOpened;
+  }
+  set isOpened(bool) {
+    this.form.reset();
+    this._isOpened = bool;
+  }
 
   constructor(private fb: FormBuilder) {}
 
@@ -49,7 +50,6 @@ export class QuestionFormComponent implements OnInit {
 
   onSubmit() {
     this.formSubmit.emit(this.form.value);
-    this.form.reset();
     this.isOpened = false;
   }
 }

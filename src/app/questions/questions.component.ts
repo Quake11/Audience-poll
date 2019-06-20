@@ -10,7 +10,6 @@ import {
   query,
   stagger,
   keyframes,
-  state,
 } from '@angular/animations';
 
 @Component({
