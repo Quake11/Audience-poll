@@ -10,7 +10,7 @@ import {
   query,
   stagger,
   keyframes,
-  state
+  state,
 } from '@angular/animations';
 
 @Component({
@@ -32,17 +32,17 @@ import {
                 style({
                   opacity: 0.5,
                   transform: 'translateY(10px)',
-                  offset: 0.3
+                  offset: 0.3,
                 }),
-                style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 })
+                style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
               ])
-            )
+            ),
           ]),
           { optional: true }
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class QuestionsComponent implements OnInit {
   questions$: Observable<Question[]>;
@@ -58,7 +58,7 @@ export class QuestionsComponent implements OnInit {
     this.questionsFacade.create({ ...data });
   }
 
-  likeToggle(question: Question) {
+  toggleLike(question: Question) {
     this.questionsFacade.toggleLike(question);
   }
 

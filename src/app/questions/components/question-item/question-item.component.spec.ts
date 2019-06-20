@@ -1,28 +1,16 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  fakeAsync
-} from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionItemComponent } from './question-item.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Question } from 'src/app/models';
+import { validQuestion } from 'src/app/models';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('QuestionItemComponent', () => {
   let component: QuestionItemComponent;
   let fixture: ComponentFixture<QuestionItemComponent>;
-  const validQuestion: Question = {
-    likes: 0,
-    liked: false,
-    name: 'Test user',
-    text: 'Test text'
-  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,23 +20,16 @@ describe('QuestionItemComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatCardModule,
-        MatListModule
+        MatListModule,
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-      .compileComponents()
-      .then(() => {
-        fixture = TestBed.createComponent(QuestionItemComponent);
-        component = fixture.componentInstance;
-        component.question = validQuestion;
-        fixture.detectChanges();
-      });
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionItemComponent);
     component = fixture.componentInstance;
-    component.question = validQuestion;
+    component.question = { ...validQuestion };
     fixture.detectChanges();
   });
 
@@ -56,18 +37,27 @@ describe('QuestionItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit likeToggle', () => {
-    spyOn(component.likeToggle, 'emit');
-    component.likeToggle.emit(validQuestion);
-    expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
+  it('should emit toggleLike', () => {
+    spyOn(component.toggleLike, 'emit');
+    component.toggleLike.emit(validQuestion);
+    expect(component.toggleLike.emit).toHaveBeenCalledWith(validQuestion);
   });
 
-  it('should emit likeToggle on like button click', fakeAsync(() => {
-    spyOn(component.likeToggle, 'emit');
+  it('should emit toggleLike on like button click', () => {
+    spyOn(component.toggleLike, 'emit');
     const likeButton = fixture.debugElement.nativeElement.querySelector(
       'button.like'
     );
     likeButton.click();
-    expect(component.likeToggle.emit).toHaveBeenCalledWith(validQuestion);
-  }));
+    expect(component.toggleLike.emit).toHaveBeenCalledWith(validQuestion);
+  });
+
+  it('should increase like count on input change', () => {
+    const likeCount = fixture.debugElement.nativeElement.querySelector(
+      '.like-count'
+    );
+    component.question.likes = 1;
+    fixture.detectChanges();
+    expect(likeCount.innerHTML).toContain('1');
+  });
 });

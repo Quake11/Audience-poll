@@ -8,7 +8,7 @@ import {
   deleteQuestion,
   toggleLikeQuestion,
 } from '../actions';
-import { Question } from 'src/app/models';
+import { Question, mockQuestions } from 'src/app/models';
 
 describe('QuestionsActions', () => {
   it('should create loadQuestions', () => {
@@ -23,11 +23,7 @@ describe('QuestionsActions', () => {
     const expectedAction = {
       type: loadQuestionsSuccess.type,
       payload: {
-        questions: [
-          { id: '1', name: 'test user 1', text: 'test question 1' },
-          { id: '2', name: 'test user 2', text: 'test question 2' },
-          { id: '3', name: 'test user 3', text: 'test question 3' },
-        ],
+        questions: mockQuestions,
       },
     };
     const action = loadQuestionsSuccess(expectedAction.payload);
@@ -35,7 +31,7 @@ describe('QuestionsActions', () => {
     expect(action.payload).toEqual(expectedAction.payload);
   });
 
-  it('should create loadTodosFailure', () => {
+  it('should create loadQuestionsFailure', () => {
     const expectedAction = {
       type: loadQuestionsFailure.type,
       payload: {

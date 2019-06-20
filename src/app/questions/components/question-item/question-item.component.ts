@@ -6,7 +6,7 @@ import {
   style,
   transition,
   animate,
-  keyframes
+  keyframes,
 } from '@angular/animations';
 
 @Component({
@@ -18,13 +18,13 @@ import {
       state(
         'unliked',
         style({
-          transform: 'scale(1)'
+          transform: 'scale(1)',
         })
       ),
       state(
         'liked',
         style({
-          transform: 'scale(1)'
+          transform: 'scale(1)',
         })
       ),
       transition(
@@ -34,7 +34,7 @@ import {
           keyframes([
             style({ transform: 'translate3d(0, 1px, 0)', offset: 0.1 }),
             style({ transform: 'translate3d(0, -5px, 0)', offset: 0.5 }),
-            style({ transform: 'translate3d(0, 1px, 0)', offset: 0.9 })
+            style({ transform: 'translate3d(0, 1px, 0)', offset: 0.9 }),
           ])
         )
       ),
@@ -45,14 +45,14 @@ import {
           keyframes([
             style({ transform: 'translate3d(0, -1px, 0)', offset: 0.1 }),
             style({ transform: 'translate3d(0, 5px, 0)', offset: 0.5 }),
-            style({ transform: 'translate3d(0, -1px, 0)', offset: 0.9 })
+            style({ transform: 'translate3d(0, -1px, 0)', offset: 0.9 }),
           ])
         )
-      )
-    ])
-  ]
+      ),
+    ]),
+  ],
 })
 export class QuestionItemComponent {
   @Input() question: Question;
-  @Output() likeToggle: EventEmitter<Question> = new EventEmitter();
+  @Output() toggleLike: EventEmitter<Question> = new EventEmitter();
 }

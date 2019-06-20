@@ -10,7 +10,7 @@
 
     <mat-card-actions>
       <button mat-icon-button [color]="question.liked ? 'primary' : 'none'" aria-label="Поставить лайк вопросу"
-        (click)="likeToggle.emit(question)" class="like">
+        (click)="toggleLike.emit(question)" class="like">
         <mat-icon [@like]="question.liked ? 'liked' : 'unliked'">thumb_up</mat-icon>
       </button>
       <span class="like-count">{{ question.likes || 0 }}</span>

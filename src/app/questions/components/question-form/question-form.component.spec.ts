@@ -8,16 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Question } from 'src/app/models';
+import { validQuestion, Question } from 'src/app/models';
 
 describe('QuestionFormComponent', () => {
   let component: QuestionFormComponent;
   let fixture: ComponentFixture<QuestionFormComponent>;
-
-  const validQuestion: Question = {
-    name: 'Test user',
-    text: 'Test text'
-  };
 
   function updateForm(question: Question) {
     const { name, text } = question;
@@ -36,8 +31,8 @@ describe('QuestionFormComponent', () => {
         MatListModule,
         MatInputModule,
         MatButtonModule,
-        MatIconModule
-      ]
+        MatIconModule,
+      ],
     }).compileComponents();
   }));
 
@@ -63,6 +58,8 @@ describe('QuestionFormComponent', () => {
 
   it('should emit event formSubmit', () => {
     spyOn(component.formSubmit, 'emit');
+    console.log(validQuestion);
+
     updateForm(validQuestion);
     component.onSubmit();
     expect(component.formSubmit.emit).toHaveBeenCalledWith(validQuestion);
