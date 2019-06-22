@@ -1,15 +1,44 @@
+@import '_variables.scss';
+
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 app-questions-list {
   .mat-list-base .mat-list-item.mat-2-line,
   .mat-list-base .mat-list-option.mat-2-line {
     height: auto !important;
+  }
+}
+
+[appSwipeAction] {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+  .swipe-action-button {
+    height: 100%;
+    background: $warn;
+    position: absolute;
+    top: 0;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+
+    mat-icon {
+      &.active {
+        transform: scale(2);
+      }
+    }
   }
 }

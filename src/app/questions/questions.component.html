@@ -12,8 +12,8 @@
 <ng-container *ngIf="(questions$ | async) as questions">
   <h2 class="mat-title" *ngIf="questions.length">Список вопросов</h2>
   <app-questions-list [@listAnimation]="questions.length">
-    <app-question-item *ngFor="let question of questions; trackBy: trackByFn;" [question]="question"
-      (toggleLike)="toggleLike($event)">
+    <app-question-item appSwipeAction (swipeAction)="onDelete(question.id)"
+      *ngFor="let question of questions; trackBy: trackByFn;" [question]="question" (toggleLike)="toggleLike($event)">
     </app-question-item>
   </app-questions-list>
 </ng-container>

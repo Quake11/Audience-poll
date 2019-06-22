@@ -1,18 +1,23 @@
-mat-card {
-  width: 100%;
+mat-list-item {
+  mat-card {
+    width: 100%;
 
-  p {
-    word-wrap: break-word !important;
-    white-space: pre-wrap !important;
-  }
+    p {
+      word-wrap: break-word !important;
+      white-space: pre-wrap !important;
+    }
 
-  mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    mat-card-actions {
+      > * {
+        margin: 15px;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .like-count {
-      margin: 15px;
+      .like-count {
+        margin-left: 10px;
+      }
     }
   }
 }
