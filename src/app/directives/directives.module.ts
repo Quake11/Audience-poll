@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SwipeActionDirective } from '.';
+import { NgxSwipeActionDirective } from '.';
 import { RendererHelperService } from '../services';
 import {
   HammerGestureConfig,
@@ -17,9 +17,9 @@ export class MyHammerConfig extends HammerGestureConfig {
   }
 }
 @NgModule({
-  declarations: [SwipeActionDirective],
+  declarations: [NgxSwipeActionDirective],
   imports: [CommonModule],
-  exports: [SwipeActionDirective],
+  exports: [NgxSwipeActionDirective],
   providers: [
     RendererHelperService,
     {

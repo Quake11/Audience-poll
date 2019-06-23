@@ -19,9 +19,11 @@ export class RendererHelperService {
     element: ElementRef,
     styles: { name: string; value: string }[]
   ) {
-    styles.forEach(s => {
-      this.renderer.setStyle(element, s.name, s.value);
-    });
+    if (element) {
+      styles.forEach(s => {
+        this.renderer.setStyle(element, s.name, s.value);
+      });
+    }
   }
 
   setManyClassesToElement(element: ElementRef, classes: string[]) {

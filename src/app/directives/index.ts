@@ -1,1 +1,1 @@
-export * from './swipe-action/swipe-action.directive';
+export * from './ngx-swipe-action/ngx-swipe-action.directive';

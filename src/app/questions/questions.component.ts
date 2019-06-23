@@ -11,6 +11,7 @@ import {
   stagger,
   keyframes
 } from '@angular/animations';
+import { NgxSwipeActionConfig } from '../directives/ngx-swipe-action/ngx-swipe-action-config.interface';
 
 @Component({
   selector: 'app-questions',
@@ -46,6 +47,10 @@ import {
 export class QuestionsComponent implements OnInit {
   questions$: Observable<Question[]>;
 
+  swipeActionConfig: NgxSwipeActionConfig = {
+    transitionTime: 300 // transition time in ms for css animations
+  };
+
   constructor(private questionsFacade: QuestionsFacade) {}
 
   ngOnInit() {
@@ -56,6 +61,7 @@ export class QuestionsComponent implements OnInit {
   onCreate(data: Question) {
     this.questionsFacade.create({ ...data });
   }
+
   onDelete(id: string) {
     console.log('onDelete', id);
   }
