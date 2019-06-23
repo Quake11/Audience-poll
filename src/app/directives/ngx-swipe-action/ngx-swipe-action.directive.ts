@@ -164,6 +164,7 @@ export class NgxSwipeActionDirective implements OnInit {
     const width = Math.abs(this.currentOffsetX);
 
     this.rendererHelper.setManySylesToElement(this.actionWrapper, [
+      // TODO: don't animate width, because of performance issues
       { name: 'width', value: `${width}px` },
       {
         name: 'right',
