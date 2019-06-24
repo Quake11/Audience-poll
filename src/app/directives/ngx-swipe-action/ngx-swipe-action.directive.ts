@@ -6,18 +6,18 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  Input
+  Input,
 } from '@angular/core';
 import { RendererHelperService } from 'src/app/services';
 import { swipeActionConfig } from './ngx-swipe-action.config';
 import {
   NgxSwipeActionConfig,
-  SwipeActionState
+  SwipeActionState,
 } from './ngx-swipe-action-config.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-  selector: '[ngxSwipeAction]'
+  selector: '[ngxSwipeAction]',
 })
 export class NgxSwipeActionDirective implements OnInit {
   @Output() ngxSwipeActionDone: EventEmitter<boolean> = new EventEmitter<
@@ -34,7 +34,7 @@ export class NgxSwipeActionDirective implements OnInit {
 
   private state = new BehaviorSubject<SwipeActionState>({
     isActive: false, // true if gonna emit event
-    currentOffsetX: 0
+    currentOffsetX: 0,
   });
 
   updateState(newValues: SwipeActionState) {
@@ -86,7 +86,6 @@ export class NgxSwipeActionDirective implements OnInit {
 
     this.currentOffsetX = 0;
     this.setTransition(this.elementRef.nativeElement, true);
-
     this.removeActionWrapper();
   }
 
@@ -148,6 +147,8 @@ export class NgxSwipeActionDirective implements OnInit {
 
   getPanPercent(offsetX: number) {
     const { minOffsetX } = this.config;
+    console.log(offsetX / minOffsetX);
+
     return offsetX / minOffsetX;
   }
 
@@ -163,24 +164,31 @@ export class NgxSwipeActionDirective implements OnInit {
     const percent = this.getPanPercent(this.currentOffsetX);
     const width = Math.abs(this.currentOffsetX);
 
+    this.renderer.setStyle(
+      this.actionWrapper,
+      'will-change',
+      'transform, width, right, opacity'
+    );
+
     this.rendererHelper.setManySylesToElement(this.actionWrapper, [
       // TODO: don't animate width, because of performance issues
-      { name: 'width', value: `${width}px` },
+      { name: 'transform', value: `scaleX(${percent})` },
+      { name: 'width', value: `${-this.config.minOffsetX}px` },
       {
         name: 'right',
-        value: `-${width}px`
+        value: `-${width}px`,
       },
       {
         name: 'opacity',
-        value: `${percent}`
-      }
+        value: `${percent}`,
+      },
     ]);
 
     this.rendererHelper.setManySylesToElement(this.actionIcon, [
       {
         name: 'transform',
-        value: `scale(${1 + percent})`
-      }
+        value: `scale(${1 + percent})`,
+      },
     ]);
   }
 
@@ -217,7 +225,7 @@ export class NgxSwipeActionDirective implements OnInit {
     this.actionIconText = this.renderer.createText(text);
     this.rendererHelper.setManyClassesToElement(this.actionIcon, [
       'mat-icon',
-      'material-icons'
+      'material-icons',
     ]);
 
     this.renderer.appendChild(this.actionIcon, this.actionIconText);
@@ -280,6 +288,7 @@ export class NgxSwipeActionDirective implements OnInit {
   setTransition(element: ElementRef, bool: boolean): void {
     const { transitionTime } = this.config;
     const value = bool ? `all ${transitionTime}ms ease-in-out` : 'none';
+    this.renderer.setStyle(element, 'will-change', 'transform');
     this.renderer.setStyle(element, 'transition', value);
   }
 }
