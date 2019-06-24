@@ -9,8 +9,9 @@ import {
   animate,
   query,
   stagger,
-  keyframes,
+  keyframes
 } from '@angular/animations';
+import { NgxSwipeActionConfig } from '../directives/ngx-swipe-action/ngx-swipe-action-config.interface';
 
 @Component({
   selector: 'app-questions',
@@ -31,20 +32,24 @@ import {
                 style({
                   opacity: 0.5,
                   transform: 'translateY(10px)',
-                  offset: 0.3,
+                  offset: 0.3
                 }),
-                style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
+                style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 })
               ])
-            ),
+            )
           ]),
           { optional: true }
-        ),
-      ]),
-    ]),
-  ],
+        )
+      ])
+    ])
+  ]
 })
 export class QuestionsComponent implements OnInit {
   questions$: Observable<Question[]>;
+
+  swipeActionConfig: NgxSwipeActionConfig = {
+    transitionTime: 300 // transition time in ms for css animations
+  };
 
   constructor(private questionsFacade: QuestionsFacade) {}
 
@@ -55,6 +60,10 @@ export class QuestionsComponent implements OnInit {
 
   onCreate(data: Question) {
     this.questionsFacade.create({ ...data });
+  }
+
+  onDelete(id: string) {
+    console.log('onDelete', id);
   }
 
   toggleLike(question: Question) {

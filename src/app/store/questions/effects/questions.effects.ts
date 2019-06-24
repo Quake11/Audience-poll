@@ -1,4 +1,4 @@
-import { QuestionsService } from 'src/app/services/questions.service';
+import { QuestionsService } from 'src/app/services';
 import {
   QuestionsActions,
   loadQuestions,
@@ -6,7 +6,7 @@ import {
   loadQuestionsFailure,
   createQuestion,
   createQuestionSuccess,
-  createQuestionFailure,
+  createQuestionFailure
 } from '../actions';
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';

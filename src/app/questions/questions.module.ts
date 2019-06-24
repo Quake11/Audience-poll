@@ -1,12 +1,13 @@
-import { AppStoreModule } from './../store/app-store.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DirectivesModule } from 'src/app/directives/directives.module';
+import { AppStoreModule } from 'src/app/store/app-store.module';
 import {
   QuestionsListComponent,
   QuestionItemComponent,
-  QuestionFormComponent,
+  QuestionFormComponent
 } from './components';
-import { QuestionsStoreModule } from '../store/questions';
+import { QuestionsStoreModule } from 'src/app/store/questions';
 import { QuestionsComponent } from './questions.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     QuestionsComponent,
     QuestionsListComponent,
     QuestionItemComponent,
-    QuestionFormComponent,
+    QuestionFormComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatListModule,
     MatIconModule,
     MatCardModule,
+    DirectivesModule
   ],
-  exports: [QuestionsComponent],
+  exports: [QuestionsComponent]
 })
 export class QuestionsModule {}
