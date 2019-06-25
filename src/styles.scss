@@ -1,4 +1,4 @@
-@import "_variables.scss";
+@import '_variables.scss';
 
 html,
 body {
@@ -6,7 +6,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 app-questions-list {
@@ -18,6 +18,7 @@ app-questions-list {
 
 [ngxSwipeAction] {
   cursor: grab;
+  will-change: transform;
 
   &:active {
     cursor: grabbing;
@@ -36,8 +37,9 @@ app-questions-list {
     font-size: 24px;
     font-weight: bold;
     border-radius: 4px;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-      0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    will-change: transform, right, widht, opacity;
 
     mat-icon {
       &.active {
