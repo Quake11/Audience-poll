@@ -251,15 +251,6 @@ export class NgxSwipeActionDirective implements OnInit {
     );
   }
 
-  /*   removeActionElements() {
-    const { transitionTime } = this.config;
-    // remove after transition animation ends
-    setTimeout(() => {
-      this.removeActionWrapper();
-      this.removeActionIcon();
-    }, transitionTime);
-  }
- */
   removeActionWrapper() {
     console.log('removeActionWrapper');
     const { transitionTime } = this.config;
